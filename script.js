@@ -29,6 +29,8 @@ function playAudio() {
     } else {
         // Play the audio files in sequence
         playNextInQueue(audioQueue);
+        // Clear any previous errors
+        showError('');
     }
 }
 
