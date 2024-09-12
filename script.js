@@ -32,10 +32,13 @@ function playAudio() {
     if (missingFiles.length > 0) {
         showError(`The following sound files are missing: ${missingFiles.join(', ')}`);
     } else {
-        // Play the audio files in sequence
-        playNextInQueue(audioQueue);
         // Clear any previous errors
         showError('');
+
+        // Start playing the audio files with a 2-second delay
+        setTimeout(() => {
+            playNextInQueue(audioQueue);
+        }, 2000); // 2-second delay before starting playback
     }
 }
 
