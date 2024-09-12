@@ -5,19 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pre-Recorded TTS with WAV</title>
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
         #errorContainer {
             color: red;
             font-weight: bold;
             margin-top: 10px;
-            display: none; /* Initially hide the error container */
+        }
+        .footer-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <h1>Type a sentence to play:</h1>
-    <input type="text" id="inputText" placeholder="Type here">
-    <button onclick="playAudio()">Play</button>
-    <div id="errorContainer"></div> <!-- Container for error messages -->
+    <div>
+        <h1>Type a sentence to play:</h1>
+        <input type="text" id="inputText" placeholder="Type here">
+        <button onclick="playAudio()">Play</button>
+        <div id="errorContainer"></div> <!-- Container for error messages -->
+    </div>
+
+    <div class="footer-text">
+        <p>MADE BY TEO (discord: us5x)</p>
+        <p>Not for commercial use, you may only use this as a personal application.</p>
+    </div>
 
     <script src="script.js"></script>
 </body>
