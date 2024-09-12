@@ -9,18 +9,23 @@ function playAudio() {
     const audioQueue = [];
     const missingFiles = [];
 
-    // Loop through the words, and for each word, create an Audio object
+    // Loop through the words
     words.forEach(word => {
-        const audioFile = `audio/${word}.wav`; // Path to the WAV file
-        const audio = new Audio(audioFile);
+        const sanitizedWord = sanitizeWord(word);
+        const audioFileSanitized = `audio/${sanitizedWord}.wav`;
+        const audioFileOriginal = `audio/${word}.wav`; // Original file path
 
-        // Check if the file exists
-        audio.onerror = () => {
-            missingFiles.push(word); // Add to missing files list
+        // Attempt to play sanitized file
+        const audioSanitized = new Audio(audioFileSanitized);
+        audioSanitized.onerror = () => {
+            // If sanitized file is missing, try original file
+            const audioOriginal = new Audio(audioFileOriginal);
+            audioOriginal.onerror = () => {
+                missingFiles.push(word); // Add to missing files list
+            };
+            audioQueue.push(audioOriginal);
         };
-
-        // Add the audio object to the queue if the file exists
-        audioQueue.push(audio);
+        audioQueue.push(audioSanitized);
     });
 
     // After setting up the queue, check if there are missing files
@@ -32,6 +37,11 @@ function playAudio() {
         // Clear any previous errors
         showError('');
     }
+}
+
+function sanitizeWord(word) {
+    // Remove anything that is not a letter or a number
+    return word.replace(/[^a-z0-9]/g, '');
 }
 
 function playNextInQueue(queue) {
