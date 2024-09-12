@@ -38,7 +38,7 @@ function playAudio() {
         // Start playing the audio files with a 2-second delay
         setTimeout(() => {
             playNextInQueue(audioQueue);
-        }, 2000); // 2-second delay before starting playback
+        }, 1200); // 1.2-second delay before starting playback
     }
 }
 
