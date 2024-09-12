@@ -7,18 +7,29 @@ function playAudio() {
 
     // Create an array to store the audio elements for each word
     const audioQueue = [];
+    const missingFiles = [];
 
     // Loop through the words, and for each word, create an Audio object
     words.forEach(word => {
         const audioFile = `audio/${word}.wav`; // Path to the WAV file
         const audio = new Audio(audioFile);
 
+        // Check if the file exists
+        audio.onerror = () => {
+            missingFiles.push(word); // Add to missing files list
+        };
+
         // Add the audio object to the queue if the file exists
         audioQueue.push(audio);
     });
 
-    // Play the audio files in sequence
-    playNextInQueue(audioQueue);
+    // After setting up the queue, check if there are missing files
+    if (missingFiles.length > 0) {
+        showError(`The following sound files are missing: ${missingFiles.join(', ')}`);
+    } else {
+        // Play the audio files in sequence
+        playNextInQueue(audioQueue);
+    }
 }
 
 function playNextInQueue(queue) {
@@ -29,4 +40,10 @@ function playNextInQueue(queue) {
 
     // Once the current audio finishes, play the next one
     currentAudio.onended = () => playNextInQueue(queue);
+}
+
+function showError(message) {
+    // Display the error message on the page
+    const errorContainer = document.getElementById('errorContainer');
+    errorContainer.textContent = message;
 }
