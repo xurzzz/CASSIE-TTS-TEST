@@ -14,6 +14,8 @@
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
         #errorContainer {
             color: red;
@@ -25,10 +27,23 @@
             font-size: 14px;
             color: #555;
         }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px; /* Adjust size as needed */
+        }
+        .content {
+            position: relative;
+            z-index: 1; /* Ensure content is above the background */
+        }
     </style>
 </head>
 <body>
-    <div>
+    <!-- Logo at the top of the page -->
+    <img src="images/cassie-logo.png" alt="Cassie Logo" class="logo">
+
+    <div class="content">
         <h1>Type a sentence to play:</h1>
         <input type="text" id="inputText" placeholder="Type here">
         <button onclick="playAudio()">Play</button>
