@@ -37,6 +37,32 @@
             position: relative;
             z-index: 1; /* Ensure content is above the background */
         }
+        .search-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px; /* Adjust width as needed */
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .scrollable-list {
+            max-height: 300px;
+            overflow-y: auto;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+        .scrollable-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .scrollable-list li:hover {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +74,12 @@
         <input type="text" id="inputText" placeholder="Type here">
         <button onclick="playAudio()">Play</button>
         <div id="errorContainer"></div> <!-- Container for error messages -->
+
+        <!-- Scrollable list and search -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search sound files..." onkeyup="filterSoundFiles()">
+            <ul id="soundFileList" class="scrollable-list"></ul>
+        </div>
     </div>
 
     <div class="footer-text">
